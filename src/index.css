@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+    system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Colors */
+  --color-fg-default: #090e24;
+  --color-fg-muted: #757676;
+  --color-fg-soft: #d0d1d1;
+  --color-fg-inverse: #ffffff;
+  --color-fg-emphasis: #283cff;
+  --color-bg-default: #ffffff;
+  --color-bg-subtle: #eeeeee;
+  --color-bg-card: #eeeeee;
+  --color-bg-muted: #eeeeee;
+  --color-bg-emphasis: #f1f2f6;
+  --color-bg-inverse: #090e24;
+  --color-border-default: #e7eaf1;
+  --color-border-subtle: rgba(0, 0, 0, 0.075);
+  --color-border-strong: #c7cad0;
+  --color-line-default: #e6e7e7;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-avatar: 0 0 0 1px rgba(31, 35, 40, 0.15);
+
+  /* Easing */
+  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  --color-fg-default: #f4f4f5;
+  --color-fg-muted: #8a8a8d;
+  --color-fg-soft: #3a3a3d;
+  --color-fg-inverse: #090e24;
+  --color-fg-emphasis: #6c7eff;
+  --color-bg-default: #0a0a0c;
+  --color-bg-subtle: #18181b;
+  --color-bg-card: #18181b;
+  --color-bg-muted: #18181b;
+  --color-bg-emphasis: #1f1f23;
+  --color-bg-inverse: #ffffff;
+  --color-border-default: #2a2a2e;
+  --color-border-subtle: rgba(255, 255, 255, 0.075);
+  --color-border-strong: #3a3a3e;
+  --color-line-default: #2a2a2e;
+  --shadow-avatar: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+html,
+body {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-fg-default);
+  background-color: var(--color-bg-default);
+  line-height: 1.6;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
