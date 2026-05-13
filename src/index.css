@@ -3,6 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --breakpoint-xs: 30rem;
+
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Display",
     system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 

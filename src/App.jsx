@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { ArrowUpRight01Icon, Sun03Icon, Moon02Icon } from '@hugeicons/core-free-icons'
+import { ArrowUpRight01Icon, Sun03Icon, Moon02Icon, Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons'
 import evan from './assets/evan.png'
 
 const spring = { type: 'spring', duration: 0.6, bounce: 0 }
@@ -160,7 +160,7 @@ function ThemeToggle({ theme, onToggle }) {
       type="button"
       onClick={onToggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="flex cursor-pointer items-center justify-center rounded-full px-4 py-3 leading-tight text-fg-default transition-colors hover:bg-bg-subtle"
+      className="flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-bg-subtle hover:text-fg-default"
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
@@ -568,6 +568,7 @@ function Page({ page }) {
 function App() {
   const [page, setPage] = useState(getCurrentPage)
   const [theme, setTheme] = useState(getInitialTheme)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const root = document.documentElement
@@ -591,6 +592,7 @@ function App() {
 
   const openPage = (event, nextPage) => {
     event.preventDefault()
+    setMenuOpen(false)
 
     if (nextPage !== page) {
       window.history.pushState(null, '', nextPage)
@@ -601,6 +603,9 @@ function App() {
 
   return (
     <div className="mx-auto w-full max-w-[60em] p-5 md:p-[60px] lg:p-20">
+      <div className="mb-3 flex justify-end">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+      </div>
       <header className="mb-4 flex items-center justify-between">
         <motion.a
           href="/work"
@@ -633,7 +638,7 @@ function App() {
           </div>
         </motion.a>
 
-        <nav className="flex items-center gap-1">
+        <nav className="hidden items-center gap-1 xs:flex">
           {navItems.map((item, i) => (
             <motion.a
               key={item.label}
@@ -649,15 +654,66 @@ function App() {
               {item.label}
             </motion.a>
           ))}
-          <motion.div
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...spring, delay: 0.1 + navItems.length * 0.05 }}
-          >
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
-          </motion.div>
         </nav>
+
+        <motion.button
+          type="button"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-default transition-colors hover:bg-bg-subtle xs:hidden"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...spring, delay: 0.1 }}
+          whileTap={{ scale: 0.94 }}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={menuOpen ? 'close' : 'open'}
+              initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
+              transition={{ type: 'spring', duration: 0.2, bounce: 0.2 }}
+              className="flex items-center justify-center"
+            >
+              <HugeiconsIcon
+                icon={menuOpen ? Cancel01Icon : Menu01Icon}
+                size={22}
+                color="currentColor"
+                strokeWidth={2}
+              />
+            </motion.span>
+          </AnimatePresence>
+        </motion.button>
       </header>
+
+      <AnimatePresence initial={false}>
+        {menuOpen && (
+          <motion.nav
+            key="mobile-nav"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+            className="overflow-hidden xs:hidden"
+          >
+            <ul className="mb-4 flex flex-col gap-1 pt-2">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.path}
+                    aria-current={page === item.path ? 'page' : undefined}
+                    onClick={(event) => openPage(event, item.path)}
+                    className="block rounded-xl px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.nav>
+        )}
+      </AnimatePresence>
 
       <motion.main
         key={page}
