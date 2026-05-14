@@ -483,7 +483,7 @@ function AboutPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Visit ${item.name}`}
-                className="block overflow-hidden rounded-xl bg-bg-muted ring-1 ring-fg-default/10"
+                className="block overflow-hidden rounded-lg bg-bg-muted ring-1 ring-fg-default/10"
               >
                 <img
                   src={item.image}
