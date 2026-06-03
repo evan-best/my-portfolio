@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/evanbest/Desktop/my-portfolio/public/swift.webp /Users/evanbest/Desktop/my-portfolio/public/ts.webp)",
+      "Bash(sips --help)",
+      "Bash(sips -s format png -Z 192 react.png --out /tmp/react_192.png)",
+      "Bash(cwebp -quiet -q 90 /tmp/react_192.png -o react.webp)",
+      "Bash(sips -s format png -Z 192 nextjs.png --out /tmp/nextjs_192.png)",
+      "Bash(cwebp -quiet -q 90 /tmp/nextjs_192.png -o nextjs.webp)",
+      "Bash(sips -s format png -Z 192 expo.svg --out /tmp/expo_192.png)",
+      "Bash(sed 's/#000020/#ffffff/g' expo.svg)",
+      "Bash(sips -s format png -z 96 96 /tmp/expo_white.svg --out /tmp/expo_logo.png)",
+      "Bash(sips -p 128 128 --padColor 000000 /tmp/expo_logo.png --out /tmp/expo_padded.png)",
+      "Bash(cwebp -quiet -q 90 /tmp/expo_padded.png -o expo.webp)",
+      "Bash(sips -Z 96 react.png --out /tmp/react_logo.png)",
+      "Bash(sips -p 128 128 --padColor 000000 /tmp/react_logo.png --out /tmp/react_padded.png)",
+      "Bash(cwebp -quiet -q 90 /tmp/react_padded.png -o react.webp)",
+      "Bash(sips -Z 96 nextjs.png --out /tmp/nextjs_logo.png)",
+      "Bash(sips -p 128 128 --padColor FFFFFF /tmp/nextjs_logo.png --out /tmp/nextjs_padded.png)"
+    ]
+  }
+}

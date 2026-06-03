@@ -10,6 +10,7 @@ const navItems = [
   { path: '/work', label: 'Work' },
   { path: '/about', label: 'About' },
   { path: '/contact', label: 'Contact' },
+  { path: '/evan-best-resume.pdf', label: 'Resume', external: true },
 ]
 
 const experienceItems = [
@@ -92,14 +93,28 @@ const medalertScreenshots = [
   '/medalert_3-portrait.webp',
 ]
 
-const techStack = [
-  { name: 'Swift', category: 'Programming language', icon: '/swift.webp' },
-  { name: 'SwiftUI', category: 'Interface framework', icon: '/swiftui.webp' },
-  { name: 'SwiftData', category: 'Persistence', icon: '/swiftdata.webp' },
-  { name: 'CloudKit', category: 'Sync and storage', icon: '/icloud.webp', rounded: true },
-  { name: 'Xcode', category: 'Development environment', icon: '/xcode.webp' },
-  { name: 'TypeScript', category: 'Programming language', icon: '/ts.webp', rounded: true, compact: true },
-  { name: 'JavaScript', category: 'Programming language', icon: '/js.webp', rounded: true, compact: true },
+const techStackGroups = [
+  {
+    label: 'Mobile',
+    items: [
+      { name: 'React Native', icon: '/react.webp', rounded: true, compact: true },
+      { name: 'Expo', icon: '/expo.webp', rounded: true, compact: true },
+      { name: 'Swift', icon: '/swift.webp' },
+      { name: 'SwiftUI', icon: '/swiftui.webp' },
+      { name: 'SwiftData', icon: '/swiftdata.webp' },
+      { name: 'CloudKit', icon: '/icloud.webp', rounded: true },
+      { name: 'Xcode', icon: '/xcode.webp' },
+    ],
+  },
+  {
+    label: 'Web',
+    items: [
+      { name: 'React', icon: '/react.webp', rounded: true, compact: true },
+      { name: 'Next.js', icon: '/nextjs.webp', rounded: true, compact: true },
+      { name: 'TypeScript', icon: '/ts.webp', rounded: true, compact: true },
+      { name: 'JavaScript', icon: '/js.webp', rounded: true, compact: true },
+    ],
+  },
 ]
 
 function getCurrentPage() {
@@ -107,7 +122,7 @@ function getCurrentPage() {
     return '/work'
   }
 
-  return navItems.some((item) => item.path === window.location.pathname)
+  return navItems.some((item) => !item.external && item.path === window.location.pathname)
     ? window.location.pathname
     : '/work'
 }
@@ -219,35 +234,39 @@ function BlurbLink({ href, children, external = false, muted = false }) {
 function TechStackSection() {
   return (
     <section className="py-10">
-      <SectionHeading id="tech-stack">Tech Stack</SectionHeading>
-      <ul className="mt-5 space-y-2">
-        {techStack.map((item) => (
-          <li
-            key={item.name}
-            className="flex items-center justify-between gap-4 rounded-xl bg-bg-card px-4 py-3"
-          >
-            <div className="flex min-w-0 items-center gap-3">
-              <span className="flex size-11 shrink-0 items-center justify-center">
-                <img
-                  src={item.icon}
-                  alt=""
-                  width={192}
-                  height={192}
-                  loading="lazy"
-                  decoding="async"
-                  className={`${item.compact ? 'size-10' : 'size-11'} ${item.rounded ? 'rounded-md' : ''} object-contain [image-rendering:-webkit-optimize-contrast]`}
-                />
-              </span>
-              <span className="truncate text-[16px] font-medium leading-none text-fg-default">
-                {item.name}
-              </span>
-            </div>
-            <span className="shrink-0 text-[14px] font-medium text-fg-muted">
-              {item.category}
-            </span>
-          </li>
+      <SectionHeading id="tech-stack">Tech I use</SectionHeading>
+      <div className="mt-5 space-y-6">
+        {techStackGroups.map((group) => (
+          <div key={group.label}>
+            <h3 className="mb-2 px-1 text-[13px] font-medium tracking-[-0.005em] text-fg-muted">
+              {group.label}
+            </h3>
+            <ul className="space-y-2">
+              {group.items.map((item) => (
+                <li
+                  key={item.name}
+                  className="flex items-center gap-3 rounded-xl bg-bg-card px-4 py-3"
+                >
+                  <span className="flex size-11 shrink-0 items-center justify-center">
+                    <img
+                      src={item.icon}
+                      alt=""
+                      width={192}
+                      height={192}
+                      loading="lazy"
+                      decoding="async"
+                      className={`${item.compact ? 'size-10' : 'size-11'} ${item.rounded ? 'rounded-lg' : ''} object-contain [image-rendering:-webkit-optimize-contrast]`}
+                    />
+                  </span>
+                  <span className="truncate text-[16px] font-medium leading-none text-fg-default">
+                    {item.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }
@@ -266,13 +285,14 @@ function WorkPage() {
 
       <section className="py-10">
         <p>
-          I'm a developer at{' '}
+          I'm the Frontend Development Lead at{' '}
           <BlurbLink href="https://www.weevva.com" external>
             Weevva
           </BlurbLink>
-          , where I build mobile and web experiences for tenant verification
-          across Canada, covering identity, income, rental history, and
-          fraud checks end to end.
+          , where I build cross-platform mobile apps in React Native and web
+          experiences in React and Next.js for tenant verification across
+          Canada, covering identity, income, rental history, and fraud checks
+          end to end.
         </p>
         <p className="mt-4">
           When I'm not at work I'm usually building something on my own. Right
@@ -416,7 +436,7 @@ function AboutPage() {
           <SectionHeading>About me</SectionHeading>
         </div>
         <h1 className="max-w-3xl text-[24px] font-semibold leading-tight tracking-[-0.02em] text-fg-default lg:text-[26px]">
-          Developer from St. John's, Newfoundland
+          I build products end-to-end.
         </h1>
       </section>
 
@@ -633,35 +653,52 @@ function App() {
               Evan Best
             </span>
             <span className="-mt-1 text-[14px] font-medium tracking-[-0.005em] text-fg-muted text-pretty">
-              iOS Developer
+              Product Engineer
             </span>
           </div>
         </motion.a>
 
-        <nav className="hidden items-center gap-1 xs:flex">
-          {navItems.map((item, i) => (
+        <div className="flex items-center gap-1">
+          <nav className="hidden items-center gap-1 md:flex">
+            {navItems.filter((item) => !item.external).map((item, i) => (
+              <motion.a
+                key={item.label}
+                href={item.path}
+                aria-current={page === item.path ? 'page' : undefined}
+                className="rounded-full px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
+                onClick={(event) => openPage(event, item.path)}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...spring, delay: 0.1 + i * 0.05 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                {item.label}
+              </motion.a>
+            ))}
+          </nav>
+
+          {navItems.filter((item) => item.external).map((item) => (
             <motion.a
               key={item.label}
               href={item.path}
-              aria-current={page === item.path ? 'page' : undefined}
-              className="rounded-full px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
-              onClick={(event) => openPage(event, item.path)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-fg-default px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] text-bg-default transition-opacity hover:opacity-85"
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ ...spring, delay: 0.1 + i * 0.05 }}
+              transition={{ ...spring, delay: 0.1 }}
               whileTap={{ scale: 0.96 }}
             >
               {item.label}
             </motion.a>
           ))}
-        </nav>
 
-        <motion.button
-          type="button"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-default transition-colors hover:bg-bg-subtle xs:hidden"
+          <motion.button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            className="ml-1 flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-default transition-colors hover:bg-bg-subtle md:hidden"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...spring, delay: 0.1 }}
@@ -684,7 +721,8 @@ function App() {
               />
             </motion.span>
           </AnimatePresence>
-        </motion.button>
+          </motion.button>
+        </div>
       </header>
 
       <AnimatePresence initial={false}>
@@ -695,10 +733,10 @@ function App() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
-            className="overflow-hidden xs:hidden"
+            className="overflow-hidden md:hidden"
           >
             <ul className="mb-4 flex flex-col gap-1 pt-2">
-              {navItems.map((item) => (
+              {navItems.filter((item) => !item.external).map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.path}
