@@ -684,6 +684,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full bg-fg-default px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] text-bg-default transition-opacity hover:opacity-85"
+              style={{ opacity: 0 }}
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...spring, delay: 0.1 }}
