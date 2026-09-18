@@ -1,130 +1,145 @@
-import { motion, AnimatePresence } from 'motion/react'
-import { useEffect, useState } from 'react'
-import { HugeiconsIcon } from '@hugeicons/react'
-import { ArrowUpRight01Icon, Sun03Icon, Moon02Icon, Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons'
-import evan from './assets/evan.png'
+import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  ArrowUpRight01Icon,
+  Sun03Icon,
+  Moon02Icon,
+  Menu01Icon,
+  Cancel01Icon,
+} from "@hugeicons/core-free-icons";
+import evan from "./assets/evan.png";
 
-const spring = { type: 'spring', duration: 0.6, bounce: 0 }
+const spring = { type: "spring", duration: 0.6, bounce: 0 };
 
 const navItems = [
-  { path: '/work', label: 'Work' },
-  { path: '/about', label: 'About' },
-  { path: '/contact', label: 'Contact' },
-  { path: '/evan-best-resume.pdf', label: 'Resume', external: true },
-]
+  { path: "/work", label: "Work" },
+  { path: "/about", label: "About" },
+  { path: "/contact", label: "Contact" },
+  { path: "/evan-best-resume.pdf", label: "Resume", external: true },
+];
 
 const experienceItems = [
   {
-    company: 'Weevva',
-    role: 'Frontend Development Lead',
-    dates: '2025 → now',
+    company: "Micromart",
+    role: "Product Engineer, Frontend",
+    dates: "2026 → now",
+    icon: "/companies/micromart.svg",
+    iconClassName: "size-full rounded-[14px] object-contain",
+    iconBackgroundClassName: "bg-bg-logo",
   },
   {
-    company: 'Weevva',
-    role: 'Mobile Application Developer',
-    dates: '2024 → 2025',
+    company: "Weevva",
+    previousRole: "Mobile Application Developer",
+    role: "Frontend Development Lead",
+    dates: "2024 → 2026",
+    icon: "/companies/weevva.webp",
+    iconClassName: "size-[34px] object-contain",
+    iconBackgroundClassName: "bg-[#003c44] dark:bg-[#303034]",
   },
-  {
-    company: 'Memorial University of Newfoundland',
-    role: 'Computer Science Student',
-    dates: '2022 → now',
-  },
-]
+];
 
 const interestItems = [
   {
-    name: 'Mobbin',
-    blurb: 'Design inspiration.',
-    image: '/interests/mobbin.webp',
-    href: 'https://mobbin.com',
+    name: "Mobbin",
+    blurb: "Design inspiration.",
+    image: "/interests/mobbin.webp",
+    href: "https://mobbin.com",
   },
   {
-    name: 'Hugeicons',
-    blurb: 'Icons I usually use.',
-    image: '/interests/hugeicons.webp',
-    href: 'https://hugeicons.com',
+    name: "Hugeicons",
+    blurb: "Icons I usually use.",
+    image: "/interests/hugeicons.webp",
+    href: "https://hugeicons.com",
   },
   {
-    name: 'Apple',
-    blurb: 'Cool products.',
-    image: '/interests/apple.webp',
-    href: 'https://apple.com',
+    name: "Apple",
+    blurb: "Cool products.",
+    image: "/interests/apple.webp",
+    href: "https://apple.com",
   },
   {
-    name: 'Linear',
-    blurb: 'Great web design.',
-    image: '/interests/linear.webp',
-    href: 'https://linear.app',
+    name: "Linear",
+    blurb: "Great web design.",
+    image: "/interests/linear.webp",
+    href: "https://linear.app",
   },
-]
+];
 
 const contactItems = [
   {
-    label: 'Mail',
-    value: 'evan.best4@gmail.com',
-    href: 'mailto:evan.best4@gmail.com',
+    label: "Mail",
+    value: "evan.best4@gmail.com",
+    href: "mailto:evan.best4@gmail.com",
   },
   {
-    label: 'LinkedIn',
-    value: 'evan-best',
-    href: 'https://linkedin.com/in/evan-best',
+    label: "LinkedIn",
+    value: "evan-best",
+    href: "https://linkedin.com/in/evan-best",
   },
   {
-    label: 'GitHub',
-    value: '@evan-best',
-    href: 'https://github.com/evan-best',
+    label: "GitHub",
+    value: "@evan-best",
+    href: "https://github.com/evan-best",
   },
   {
-    label: 'Threads',
-    value: '@evan_best4',
-    href: 'https://www.threads.net/@evan_best4',
+    label: "Threads",
+    value: "@evan_best4",
+    href: "https://www.threads.net/@evan_best4",
   },
-]
+];
 
 const audinoteScreenshots = [
-  '/audinote_1-portrait.webp',
-  '/audinote_2-portrait.webp',
-  '/audinote_3-portrait.webp',
-]
+  "/audinote_1-portrait.webp",
+  "/audinote_2-portrait.webp",
+  "/audinote_3-portrait.webp",
+];
 
 const medalertScreenshots = [
-  '/medalert_1-portrait.webp',
-  '/medalert_2-portrait.webp',
-  '/medalert_3-portrait.webp',
-]
+  "/medalert_1-portrait.webp",
+  "/medalert_2-portrait.webp",
+  "/medalert_3-portrait.webp",
+];
 
 const techStackGroups = [
   {
-    label: 'Mobile',
+    label: "Mobile",
     items: [
-      { name: 'React Native', icon: '/react.webp', rounded: true, compact: true },
-      { name: 'Expo', icon: '/expo.webp', rounded: true, compact: true },
-      { name: 'Swift', icon: '/swift.webp' },
-      { name: 'SwiftUI', icon: '/swiftui.webp' },
-      { name: 'SwiftData', icon: '/swiftdata.webp' },
-      { name: 'CloudKit', icon: '/icloud.webp', rounded: true },
-      { name: 'Xcode', icon: '/xcode.webp' },
+      {
+        name: "React Native",
+        icon: "/react.webp",
+        rounded: true,
+        compact: true,
+      },
+      { name: "Expo", icon: "/expo.webp", rounded: true, compact: true },
+      { name: "Swift", icon: "/swift.webp" },
+      { name: "SwiftUI", icon: "/swiftui.webp" },
+      { name: "SwiftData", icon: "/swiftdata.webp" },
+      { name: "CloudKit", icon: "/icloud.webp", rounded: true },
+      { name: "Xcode", icon: "/xcode.webp" },
     ],
   },
   {
-    label: 'Web',
+    label: "Web",
     items: [
-      { name: 'React', icon: '/react.webp', rounded: true, compact: true },
-      { name: 'Next.js', icon: '/nextjs.webp', rounded: true, compact: true },
-      { name: 'TypeScript', icon: '/ts.webp', rounded: true, compact: true },
-      { name: 'JavaScript', icon: '/js.webp', rounded: true, compact: true },
+      { name: "React", icon: "/react.webp", rounded: true, compact: true },
+      { name: "Next.js", icon: "/nextjs.webp", rounded: true, compact: true },
+      { name: "TypeScript", icon: "/ts.webp", rounded: true, compact: true },
+      { name: "JavaScript", icon: "/js.webp", rounded: true, compact: true },
     ],
   },
-]
+];
 
 function getCurrentPage() {
-  if (typeof window === 'undefined') {
-    return '/work'
+  if (typeof window === "undefined") {
+    return "/work";
   }
 
-  return navItems.some((item) => !item.external && item.path === window.location.pathname)
+  return navItems.some(
+    (item) => !item.external && item.path === window.location.pathname,
+  )
     ? window.location.pathname
-    : '/work'
+    : "/work";
 }
 
 function SectionHeading({ id, children }) {
@@ -133,7 +148,7 @@ function SectionHeading({ id, children }) {
       <h2 className="text-[14px] font-medium leading-tight tracking-[-0.005em] text-fg-muted">
         {children}
       </h2>
-    )
+    );
   }
 
   return (
@@ -155,26 +170,26 @@ function SectionHeading({ id, children }) {
         {children}
       </a>
     </h2>
-  )
+  );
 }
 
 function getInitialTheme() {
-  if (typeof window === 'undefined') return 'light'
-  const stored = window.localStorage.getItem('theme')
-  if (stored === 'light' || stored === 'dark') return stored
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light'
+  if (typeof window === "undefined") return "light";
+  const stored = window.localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 function ThemeToggle({ theme, onToggle }) {
-  const isDark = theme === 'dark'
+  const isDark = theme === "dark";
 
   return (
     <button
       type="button"
       onClick={onToggle}
-      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-muted transition-colors hover:bg-bg-subtle hover:text-fg-default"
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -183,7 +198,7 @@ function ThemeToggle({ theme, onToggle }) {
           initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
           exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-          transition={{ type: 'spring', duration: 0.2, bounce: 0.2 }}
+          transition={{ type: "spring", duration: 0.2, bounce: 0.2 }}
           className="flex items-center justify-center"
         >
           <HugeiconsIcon
@@ -195,7 +210,7 @@ function ThemeToggle({ theme, onToggle }) {
         </motion.span>
       </AnimatePresence>
     </button>
-  )
+  );
 }
 
 function ArrowUpRightIcon() {
@@ -206,16 +221,16 @@ function ArrowUpRightIcon() {
       color="currentColor"
       strokeWidth={2}
     />
-  )
+  );
 }
 
 function BlurbLink({ href, children, external = false, muted = false }) {
   return (
     <a
       href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      className={`inline-flex items-start font-medium leading-none underline decoration-fg-soft underline-offset-[3px] hover:decoration-fg-default ${muted ? 'text-fg-muted hover:text-fg-default' : ''}`}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className={`inline-flex items-start font-medium leading-none underline decoration-fg-soft underline-offset-[3px] hover:decoration-fg-default ${muted ? "text-fg-muted hover:text-fg-default" : ""}`}
     >
       <span>{children}</span>
       {external && (
@@ -228,7 +243,7 @@ function BlurbLink({ href, children, external = false, muted = false }) {
         />
       )}
     </a>
-  )
+  );
 }
 
 function TechStackSection() {
@@ -255,7 +270,7 @@ function TechStackSection() {
                       height={192}
                       loading="lazy"
                       decoding="async"
-                      className={`${item.compact ? 'size-10' : 'size-11'} ${item.rounded ? 'rounded-lg' : ''} object-contain [image-rendering:-webkit-optimize-contrast]`}
+                      className={`${item.compact ? "size-10" : "size-11"} ${item.rounded ? "rounded-lg" : ""} object-contain [image-rendering:-webkit-optimize-contrast]`}
                     />
                   </span>
                   <span className="truncate text-[16px] font-medium leading-none text-fg-default">
@@ -268,7 +283,7 @@ function TechStackSection() {
         ))}
       </div>
     </section>
-  )
+  );
 }
 
 function WorkPage() {
@@ -279,29 +294,27 @@ function WorkPage() {
           <SectionHeading>Currently working on</SectionHeading>
         </div>
         <h1 className="max-w-3xl text-[24px] font-semibold leading-tight tracking-[-0.02em] text-fg-default lg:text-[26px]">
-          Tenant verification tools at Weevva
+          Operator platform at Micromart
         </h1>
       </section>
 
       <section className="py-10">
         <p>
-          I'm the Frontend Development Lead at{' '}
-          <BlurbLink href="https://www.weevva.com" external>
-            Weevva
+          I'm a Product Engineer at{" "}
+          <BlurbLink href="https://www.micromart.com" external>
+            Micromart
           </BlurbLink>
-          , where I build cross-platform mobile apps in React Native and web
-          experiences in React and Next.js for tenant verification across
-          Canada, covering identity, income, rental history, and fraud checks
-          end to end.
+          , where I work across product decisions, UX, and frontend
+          implementation on the platform that operators use to run and scale
+          their Smart Stores. I work closely with the product experience team to
+          turn ideas into polished, production-ready interfaces.
         </p>
         <p className="mt-4">
           When I'm not at work I'm usually building something on my own. Right
-          now that's{' '}
-          <BlurbLink href="#audinote">AudiNote</BlurbLink>
-          , an audio journaling app with live transcription and timestamped
-          playback, and{' '}
-          <BlurbLink href="#medalert">MedAlert</BlurbLink>
-          , a medication tracker built around Canadian drug data.
+          now that's <BlurbLink href="#audinote">AudiNote</BlurbLink>, an audio
+          journaling app with live transcription and timestamped playback, and{" "}
+          <BlurbLink href="#medalert">MedAlert</BlurbLink>, a medication tracker
+          built around Canadian drug data.
         </p>
       </section>
 
@@ -310,21 +323,52 @@ function WorkPage() {
 
         <ul className="mt-5 space-y-2">
           {experienceItems.map((item) => (
-            <li
-              key={`${item.company}-${item.role}`}
-              className="flex flex-col gap-2 rounded-xl bg-bg-card p-4 sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div className="flex flex-col leading-[1.3]">
-                <span className="text-[16px] font-semibold tracking-[-0.005em] text-fg-default">
-                  {item.company}
+            <li key={item.company} className="rounded-xl bg-bg-card p-4">
+              <div className="flex min-w-0 items-start gap-3">
+                <span
+                  className={`flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full ring-1 ring-inset ring-black/10 dark:ring-white/10 ${item.iconBackgroundClassName}`}
+                >
+                  <img
+                    src={item.icon}
+                    alt=""
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                    className={item.iconClassName}
+                  />
                 </span>
-                <span className="text-[14px] font-normal text-fg-muted">
-                  {item.role}
-                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-4 leading-[1.3]">
+                    <div className="flex min-w-0 flex-col">
+                      <span className="text-[16px] font-semibold tracking-[-0.005em] text-fg-default">
+                        {item.company}
+                      </span>
+                      {item.previousRole ? (
+                        <span className="flex flex-wrap items-center gap-x-1.5 text-[14px] font-normal text-fg-muted">
+                          <span className="sr-only">Promoted from </span>
+                          <span>{item.previousRole}</span>
+                          <span
+                            aria-hidden="true"
+                            className="flex size-4 items-center justify-center rounded-full bg-black/[0.12] text-[11px] font-semibold leading-none text-fg-default dark:bg-white/[0.15]"
+                          >
+                            →
+                          </span>
+                          <span className="sr-only"> to </span>
+                          <span>{item.role}</span>
+                        </span>
+                      ) : (
+                        <span className="text-[14px] font-normal text-fg-muted">
+                          {item.role}
+                        </span>
+                      )}
+                    </div>
+                    <span className="shrink-0 text-[14px] font-normal tabular-nums text-fg-muted">
+                      {item.dates}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span className="shrink-0 text-[14px] font-normal tabular-nums text-fg-muted">
-                {item.dates}
-              </span>
             </li>
           ))}
         </ul>
@@ -354,15 +398,19 @@ function WorkPage() {
             <div className="flex flex-col gap-1">
               <div className="flex items-center justify-between gap-4">
                 <span className="font-semibold text-fg-default">AudiNote</span>
-                <BlurbLink href="https://github.com/evan-best/AudiNote" external muted>
+                <BlurbLink
+                  href="https://github.com/evan-best/AudiNote"
+                  external
+                  muted
+                >
                   GitHub
                 </BlurbLink>
               </div>
               <p className="text-fg-muted">
-                An audio journaling app with live transcription via the
-                Speech framework and timestamped playback through
-                AVFoundation, with entries persisted in SwiftData and synced
-                across devices via CloudKit. iOS, Swift, SwiftUI.
+                An audio journaling app with live transcription via the Speech
+                framework and timestamped playback through AVFoundation, with
+                entries persisted in SwiftData and synced across devices via
+                CloudKit. iOS, Swift, SwiftUI.
               </p>
             </div>
           </li>
@@ -387,15 +435,18 @@ function WorkPage() {
             <div className="flex flex-col gap-1">
               <div className="flex items-center justify-between gap-4">
                 <span className="font-semibold text-fg-default">MedAlert</span>
-                <BlurbLink href="https://github.com/evan-best/MedAlert" external muted>
+                <BlurbLink
+                  href="https://github.com/evan-best/MedAlert"
+                  external
+                  muted
+                >
                   GitHub
                 </BlurbLink>
               </div>
               <p className="text-fg-muted">
-                A medication tracker with local reminders via
-                UserNotifications, built around a cleaned-up local SQLite
-                copy of the Canadian government drug database. iOS, Swift,
-                SwiftUI.
+                A medication tracker with local reminders via UserNotifications,
+                built around a cleaned-up local SQLite copy of the Canadian
+                government drug database. iOS, Swift, SwiftUI.
               </p>
             </div>
           </li>
@@ -425,7 +476,7 @@ function WorkPage() {
         </span>
       </motion.footer>
     </div>
-  )
+  );
 }
 
 function AboutPage() {
@@ -443,42 +494,39 @@ function AboutPage() {
       <section className="py-10">
         <p>
           I've been obsessed with computers and tech for as long as I can
-          remember. That curiosity turned into a Computer Science degree at{' '}
-          <BlurbLink
-            href="https://www.mun.ca"
-            external
-          >
+          remember. That curiosity led me to study Computer Science at{" "}
+          <BlurbLink href="https://www.mun.ca" external>
             Memorial University
+          </BlurbLink>{" "}
+          and become a Product Engineer at{" "}
+          <BlurbLink href="https://www.micromart.com" external>
+            Micromart
           </BlurbLink>
-          {' '}and a job at{' '}
-          <BlurbLink href="https://www.weevva.com" external>
-            Weevva
-          </BlurbLink>
-          , where I lead frontend development.
+          where I build product-focused frontend experiences for the Micromart
+          platform.
         </p>
         <p className="mt-4">
-          Outside of work I'm building iOS apps like{' '}
-          <BlurbLink href="/work#audinote">AudiNote</BlurbLink>
-          {' '}and{' '}
-          <BlurbLink href="/work#medalert">MedAlert</BlurbLink>
-          , watching the Habs, or playing CS2 and Rocket League.
+          Outside of work I'm building iOS apps like{" "}
+          <BlurbLink href="/work#audinote">AudiNote</BlurbLink> and{" "}
+          <BlurbLink href="/work#medalert">MedAlert</BlurbLink>, watching the
+          Habs, or playing CS2 and Rocket League.
         </p>
       </section>
 
       <section className="py-10">
         <SectionHeading id="ai">How I use AI</SectionHeading>
         <p className="mt-5">
-          I use{' '}
+          I use{" "}
           <BlurbLink href="https://claude.com/claude-code" external>
             Claude Code
-          </BlurbLink>
-          {' '}and{' '}
+          </BlurbLink>{" "}
+          and{" "}
           <BlurbLink href="https://github.com/openai/codex" external>
             Codex
-          </BlurbLink>
-          {' '}mostly for frontend work, building interfaces that feel alive
-          and minimal, and to get through the tedious parts like grids and
-          spacing. One piece of writing I keep coming back to is{' '}
+          </BlurbLink>{" "}
+          mostly for frontend work, building interfaces that feel alive and
+          minimal, and to get through the tedious parts like grids and spacing.
+          One piece of writing I keep coming back to is{" "}
           <BlurbLink
             href="https://jakub.kr/writing/details-that-make-interfaces-feel-better"
             external
@@ -514,16 +562,17 @@ function AboutPage() {
                 />
               </a>
               <div className="flex flex-col gap-1">
-                <span className="font-semibold text-fg-default">{item.name}</span>
+                <span className="font-semibold text-fg-default">
+                  {item.name}
+                </span>
                 <p className="text-fg-muted">{item.blurb}</p>
               </div>
             </li>
           ))}
         </ul>
       </section>
-
     </div>
-  )
+  );
 }
 
 function ContactPage() {
@@ -537,7 +586,7 @@ function ContactPage() {
 
       <section className="py-10">
         <p>
-          Feel free to reach out anytime at{' '}
+          Feel free to reach out anytime at{" "}
           <a
             href="mailto:evan.best4@gmail.com"
             className="underline decoration-fg-soft underline-offset-[3px] hover:decoration-fg-default"
@@ -555,8 +604,12 @@ function ContactPage() {
             <li key={item.label}>
               <a
                 href={item.href}
-                target={item.href.startsWith('http') ? '_blank' : undefined}
-                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  item.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
                 className="flex items-center justify-between gap-4 rounded-xl bg-bg-card p-4 text-fg-default no-underline transition-colors hover:bg-bg-muted"
               >
                 <span className="text-[16px] font-normal">{item.label}</span>
@@ -570,56 +623,56 @@ function ContactPage() {
         </ul>
       </section>
     </div>
-  )
+  );
 }
 
 function Page({ page }) {
-  if (page === '/about') {
-    return <AboutPage />
+  if (page === "/about") {
+    return <AboutPage />;
   }
 
-  if (page === '/contact') {
-    return <ContactPage />
+  if (page === "/contact") {
+    return <ContactPage />;
   }
 
-  return <WorkPage />
+  return <WorkPage />;
 }
 
 function App() {
-  const [page, setPage] = useState(getCurrentPage)
-  const [theme, setTheme] = useState(getInitialTheme)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [page, setPage] = useState(getCurrentPage);
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const root = document.documentElement
-    root.classList.toggle('dark', theme === 'dark')
-    window.localStorage.setItem('theme', theme)
-  }, [theme])
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem("theme", theme);
+  }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   useEffect(() => {
-    const handlePopState = () => setPage(getCurrentPage())
+    const handlePopState = () => setPage(getCurrentPage());
 
-    window.addEventListener('popstate', handlePopState)
+    window.addEventListener("popstate", handlePopState);
 
     if (!navItems.some((item) => item.path === window.location.pathname)) {
-      window.history.replaceState(null, '', '/work')
+      window.history.replaceState(null, "", "/work");
     }
 
-    return () => window.removeEventListener('popstate', handlePopState)
-  }, [])
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const openPage = (event, nextPage) => {
-    event.preventDefault()
-    setMenuOpen(false)
+    event.preventDefault();
+    setMenuOpen(false);
 
     if (nextPage !== page) {
-      window.history.pushState(null, '', nextPage)
-      setPage(nextPage)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.history.pushState(null, "", nextPage);
+      setPage(nextPage);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }
+  };
 
   return (
     <div className="mx-auto w-full max-w-[60em] p-5 md:p-[60px] lg:p-20">
@@ -629,7 +682,7 @@ function App() {
       <header className="mb-4 flex items-center justify-between">
         <motion.a
           href="/work"
-          onClick={(event) => openPage(event, '/work')}
+          onClick={(event) => openPage(event, "/work")}
           className="group flex items-center"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
@@ -637,7 +690,7 @@ function App() {
         >
           <div
             className="mr-3 size-10 overflow-hidden rounded-full"
-            style={{ boxShadow: 'var(--shadow-avatar)' }}
+            style={{ boxShadow: "var(--shadow-avatar)" }}
           >
             <motion.img
               src={evan}
@@ -660,67 +713,71 @@ function App() {
 
         <div className="flex items-center gap-1">
           <nav className="hidden items-center gap-1 md:flex">
-            {navItems.filter((item) => !item.external).map((item, i) => (
+            {navItems
+              .filter((item) => !item.external)
+              .map((item, i) => (
+                <motion.a
+                  key={item.label}
+                  href={item.path}
+                  aria-current={page === item.path ? "page" : undefined}
+                  className="rounded-full px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
+                  onClick={(event) => openPage(event, item.path)}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...spring, delay: 0.1 + i * 0.05 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+          </nav>
+
+          {navItems
+            .filter((item) => item.external)
+            .map((item) => (
               <motion.a
                 key={item.label}
                 href={item.path}
-                aria-current={page === item.path ? 'page' : undefined}
-                className="rounded-full px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
-                onClick={(event) => openPage(event, item.path)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-fg-default px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] text-bg-default hover:opacity-85"
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...spring, delay: 0.1 + i * 0.05 }}
+                transition={{ ...spring, delay: 0.1 }}
                 whileTap={{ scale: 0.96 }}
               >
                 {item.label}
               </motion.a>
             ))}
-          </nav>
-
-          {navItems.filter((item) => item.external).map((item) => (
-            <motion.a
-              key={item.label}
-              href={item.path}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-fg-default px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] text-bg-default hover:opacity-85"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...spring, delay: 0.1 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              {item.label}
-            </motion.a>
-          ))}
 
           <motion.button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             className="ml-1 flex size-11 cursor-pointer items-center justify-center rounded-full text-fg-default transition-colors hover:bg-bg-subtle md:hidden"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...spring, delay: 0.1 }}
-          whileTap={{ scale: 0.94 }}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={menuOpen ? 'close' : 'open'}
-              initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
-              transition={{ type: 'spring', duration: 0.2, bounce: 0.2 }}
-              className="flex items-center justify-center"
-            >
-              <HugeiconsIcon
-                icon={menuOpen ? Cancel01Icon : Menu01Icon}
-                size={22}
-                color="currentColor"
-                strokeWidth={2}
-              />
-            </motion.span>
-          </AnimatePresence>
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...spring, delay: 0.1 }}
+            whileTap={{ scale: 0.94 }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={menuOpen ? "close" : "open"}
+                initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
+                transition={{ type: "spring", duration: 0.2, bounce: 0.2 }}
+                className="flex items-center justify-center"
+              >
+                <HugeiconsIcon
+                  icon={menuOpen ? Cancel01Icon : Menu01Icon}
+                  size={22}
+                  color="currentColor"
+                  strokeWidth={2}
+                />
+              </motion.span>
+            </AnimatePresence>
           </motion.button>
         </div>
       </header>
@@ -730,24 +787,26 @@ function App() {
           <motion.nav
             key="mobile-nav"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+            transition={{ type: "spring", duration: 0.3, bounce: 0 }}
             className="overflow-hidden md:hidden"
           >
             <ul className="mb-4 flex flex-col gap-1 pt-2">
-              {navItems.filter((item) => !item.external).map((item) => (
-                <li key={item.label}>
-                  <a
-                    href={item.path}
-                    aria-current={page === item.path ? 'page' : undefined}
-                    onClick={(event) => openPage(event, item.path)}
-                    className="block rounded-xl px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {navItems
+                .filter((item) => !item.external)
+                .map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.path}
+                      aria-current={page === item.path ? "page" : undefined}
+                      onClick={(event) => openPage(event, item.path)}
+                      className="block rounded-xl px-4 py-3 text-[15px] font-medium leading-tight tracking-[-0.005em] transition-colors hover:bg-bg-subtle aria-[current=page]:bg-bg-subtle"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
             </ul>
           </motion.nav>
         )}
@@ -763,7 +822,7 @@ function App() {
         <Page page={page} />
       </motion.main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

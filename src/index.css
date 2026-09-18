@@ -19,6 +19,7 @@
   --color-bg-card: #eeeeee;
   --color-bg-muted: #eeeeee;
   --color-bg-emphasis: #f1f2f6;
+  --color-bg-logo: #e8e8e8;
   --color-bg-inverse: #090e24;
   --color-border-default: #e7eaf1;
   --color-border-subtle: rgba(0, 0, 0, 0.075);
@@ -56,6 +57,7 @@ html.dark {
   --color-bg-card: #18181b;
   --color-bg-muted: #18181b;
   --color-bg-emphasis: #1f1f23;
+  --color-bg-logo: #d8d8d8;
   --color-bg-inverse: #ffffff;
   --color-border-default: #2a2a2e;
   --color-border-subtle: rgba(255, 255, 255, 0.075);
